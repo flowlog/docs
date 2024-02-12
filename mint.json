@@ -27,6 +27,10 @@
   },
   "tabs": [
     {
+      "name": "SDK Reference",
+      "url": "sdk-reference"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
     }
@@ -60,8 +64,13 @@
         "essentials/code",
         "essentials/images",
         "essentials/settings",
-        "essentials/navigation"
+        "essentials/navigation",
+        "essentials/reusable-snippets"
       ]
+    },
+    {
+      "group": "SDK Documentation",
+      "pages": ["sdk-reference/introduction"]
     },
     {
       "group": "API Documentation",
