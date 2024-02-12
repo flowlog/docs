@@ -172,3 +172,30 @@ export default function RootLayout({
 ```
 
 </CodeGroup>
+
+### Track your first event
+
+<CodeGroup>
+
+```jsx pages/index.js
+import { useFlowlog } from "flowlog-js/react";
+
+export default function Index() {
+  const flowlog = useFlowlog();
+
+  return (
+    <div>
+      <h1>Home</h1>
+      <button
+        onClick={() => {
+          flowlog?.track("button_clicked", { button_name: "home_button" });
+        }}
+      >
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+</CodeGroup>

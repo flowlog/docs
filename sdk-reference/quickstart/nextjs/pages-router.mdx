@@ -3,4 +3,81 @@ title: "Next.js Pages Router"
 description: "Learn how to send your first event to using Flowlog SDK"
 ---
 
-<Note>TODO</Note>
+import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
+
+<Info>
+  **Prerequisite** You should have installed Node.js (version 18.10.0 or
+  higher).
+</Info>
+
+## Setup
+
+<InstallFlowlogSDK />
+
+### Integrate Flowlog at the root of your app (pages/\_app.js).
+
+<CodeGroup>
+
+```jsx pages/_app.js
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+import flowlog from 'flowlog-js';
+import { FlowlogProvider } from 'flowlog-js/react';
+
+if (typeof window !== 'undefined') {
+  flowlog?.init(process.env.NEXT_PUBLIC_FLOWLOG_TOKEN!);
+}
+
+export default function App({ Component, pageProps }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Track page views
+    const handleRouteChange = () => {
+      flowlog?.track('$pageview');
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, []);
+
+  return (
+    <FlowlogProvider client={flowlog}>
+      <Component {...pageProps} />
+    </FlowlogProvider>
+  );
+}
+
+```
+
+</CodeGroup>
+
+### Track your first event
+
+<CodeGroup>
+
+```jsx pages/index.js
+import { useFlowlog } from "flowlog-js/react";
+
+export default function Index() {
+  const flowlog = useFlowlog();
+
+  return (
+    <div>
+      <h1>Home</h1>
+      <button
+        onClick={() => {
+          flowlog?.track("button_clicked", { button_name: "home_button" });
+        }}
+      >
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+</CodeGroup>
