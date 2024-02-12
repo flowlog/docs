@@ -72,6 +72,21 @@
       "group": "SDK Documentation",
       "pages": ["sdk-reference/introduction"]
     },
+
+    {
+      "group": "Quickstart",
+      "pages": [
+        "sdk-reference/quickstart/react",
+        {
+          "group": "Next.js",
+          "pages": [
+            "sdk-reference/quickstart/nextjs/app-router",
+            "sdk-reference/quickstart/nextjs/pages-router"
+          ]
+        }
+      ]
+    },
+
     {
       "group": "API Documentation",
       "pages": ["api-reference/introduction"]

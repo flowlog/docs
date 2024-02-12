@@ -1,0 +1,174 @@
+---
+title: "Next.js App Router"
+description: "Learn how to send your first event to using Flowlog SDK"
+---
+
+import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
+
+<Info>
+  **Prerequisite** You should have installed Node.js (version 18.10.0 or
+  higher).
+</Info>
+
+## Setup
+
+<InstallFlowlogSDK />
+
+### Create a 'app/provider' file to initialize the Flowlog SDK
+
+<CodeGroup>
+
+```jsx javascript
+// app/provider.jsx
+
+"use client";
+import flowlog from "flowlog-js";
+import { FlowlogProvider } from "flowlog-js/react";
+
+if (typeof window !== "undefined") {
+  flowlog.init(process.env.NEXT_PUBLIC_FLOWLOG_TOKEN);
+}
+
+export function FLProvider({ children }) {
+  return <FlowlogProvider client={flowlog}>{children}</FlowlogProvider>;
+}
+```
+
+```jsx typescript
+// app/provider.tsx
+
+"use client";
+import flowlog from "flowlog-js";
+import { FlowlogProvider } from "flowlog-js/react";
+
+if (typeof window !== "undefined") {
+  flowlog.init(process.env.NEXT_PUBLIC_FLOWLOG_TOKEN!);
+}
+
+export function FLProvider({ children }: { children: React.ReactNode }) {
+  return <FlowlogProvider client={flowlog}>{children}</FlowlogProvider>;
+}
+```
+
+</CodeGroup>
+
+Then, to capture pageviews, we set up a FlowlogPageView component to listen to URL path changes:
+
+<CodeGroup>
+
+```jsx javascript
+// app/FlowlogPageView.js
+"use client";
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useFlowlog } from "flowlog-js/react";
+
+export default function FlowlogPageView() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const flowlog = useFlowlog();
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && flowlog) {
+      let url = window.origin + pathname;
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`;
+      }
+      flowlog.track("$pageview", {
+        $current_url: url,
+      });
+    }
+  }, [pathname, searchParams, flowlog]);
+
+  return null;
+}
+```
+
+```jsx typescript
+// app/FlowlogPageView.tsx
+"use client";
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useFlowlog } from "flowlog-js/react";
+
+export default function FlowlogPageView() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const flowlog = useFlowlog();
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && flowlog) {
+      let url = window.origin + pathname;
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`;
+      }
+      flowlog.track("$pageview", {
+        $current_url: url,
+      });
+    }
+  }, [pathname, searchParams, flowlog]);
+
+  return null;
+}
+```
+
+</CodeGroup>
+
+Then, import the `FLProvider` component into your app/layout file and wrap your app with it. We also dynamically import the `FlowlogPageView` component and include it as a child of `FLProvider`.
+
+<CodeGroup>
+
+```jsx javascript
+// app/layout.js
+import { FLProvider } from "./providers";
+
+import dynamic from "next/dynamic";
+
+const FlowlogPageView = dynamic(() => import("./FlowlogPageView"), {
+  ssr: false,
+});
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <FLProvider>
+        <body>
+          <FlowlogPageView />
+          {children}
+        </body>
+      </FLProvider>
+    </html>
+  );
+}
+```
+
+```jsx typescript
+// app/layout.tsx
+import { FLProvider } from "./providers";
+import dynamic from "next/dynamic";
+
+const FlowlogPageView = dynamic(() => import("./FlowlogPageView"), {
+  ssr: false,
+});
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode,
+}) {
+  return (
+    <html lang="en">
+      <FLProvider>
+        <body>
+          <FlowlogPageView />
+          {children}
+        </body>
+      </FLProvider>
+    </html>
+  );
+}
+```
+
+</CodeGroup>
