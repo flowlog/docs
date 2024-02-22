@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Documentation",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -29,18 +29,9 @@
     {
       "name": "SDK Reference",
       "url": "sdk-reference"
-    },
-    {
-      "name": "API Reference",
-      "url": "api-reference"
     }
   ],
   "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
     {
       "name": "Community",
       "icon": "slack",
@@ -55,48 +46,32 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": ["introduction"]
     },
     {
-      "group": "Essentials",
+      "group": "Events",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "events/pageviews",
+        "events/track",
+        "events/drop-off",
+        "events/identify"
       ]
     },
     {
-      "group": "Get Started",
-      "pages": ["sdk-reference/introduction"]
+      "group": "Languages",
+      "pages": ["sdk-reference/languages/javascript"]
     },
-
     {
-      "group": "Quickstart",
+      "group": "Frameworks",
       "pages": [
-        "sdk-reference/quickstart/react",
+        "sdk-reference/frameworks/react",
         {
           "group": "Next.js",
           "pages": [
-            "sdk-reference/quickstart/nextjs/app-router",
-            "sdk-reference/quickstart/nextjs/pages-router"
+            "sdk-reference/frameworks/nextjs/app-router",
+            "sdk-reference/frameworks/nextjs/pages-router"
           ]
         }
-      ]
-    },
-
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
       ]
     }
   ],
