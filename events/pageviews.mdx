@@ -1,19 +1,36 @@
 ---
 title: "Pageviews"
-description: "Display inline code and code blocks"
+description: "Track when a user views a specific page on a website or application."
 ---
 
-## Basic
+## Description
 
-### Inline Code
+A pageview event refers to tracking when a user views a specific page on a website or application. It is a common type of event that provides valuable information about user behavior and engagement. When a pageview event occurs, various properties related to user interaction are captured, such as the browser and device they are using, the URL of the page, the timestamp of the event, and geographic information such as the user's location.
 
-To denote a `word` or `phrase` as code, enclose it in backticks (`).
+### Properties
 
-```
-To denote a `word` or `phrase` as code, enclose it in backticks (`).
-```
+On every pageview event, flowlog automatically capture the following properties:
 
-### Code Block
+<ResponseField name="browser" type="auto[]">
+  An array of the anchors, includes the `icon`, `color`, and `url`.
+</ResponseField>
+<ResponseField name="timestamp" type="auto[]">
+  An array of the anchors, includes the `icon`, `color`, and `url`.
+</ResponseField>
+<ResponseField name="system" type="auto[]">
+  An array of the anchors, includes the `icon`, `color`, and `url`.
+</ResponseField>
+<ResponseField name="device" type="auto[]">
+  An array of the anchors, includes the `icon`, `color`, and `url`.
+</ResponseField>
+<ResponseField name="geolocation" type="auto[]">
+  An array of the anchors, includes the `icon`, `color`, and `url`.
+</ResponseField>
+<ResponseField name="distinct_id" type="auto[]">
+  An array of the anchors, includes the `icon`, `color`, and `url`.
+</ResponseField>
+
+### Usage
 
 Use [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) by enclosing code in three backticks and follow the leading ticks with the programming language of your snippet to get syntax highlighting. Optionally, you can also write the name of your code after the programming language.
 
