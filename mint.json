@@ -11,8 +11,8 @@
     "light": "#FF692E",
     "dark": "#FF692E",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#FF692E",
+      "to": "#FF692E"
     }
   },
   "topbarLinks": [
@@ -25,16 +25,6 @@
     "name": "Dashboard",
     "url": "https://app.flowlog.io"
   },
-  "tabs": [
-    {
-      "name": "SDK Reference",
-      "url": "sdk-reference"
-    },
-    {
-      "name": "Guides",
-      "url": "guides"
-    }
-  ],
   "anchors": [
     {
       "name": "Community",
@@ -44,7 +34,7 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://flowlog.io/blog"
     }
   ],
   "navigation": [
@@ -54,29 +44,25 @@
     },
     {
       "group": "Events",
-      "pages": [
-        "events/pageviews",
-        "events/track",
-        "events/drop-off",
-        "events/identify"
-      ]
+      "pages": ["events/pageviews", "events/track", "events/identify"]
     },
     {
-      "group": "Languages",
-      "pages": ["sdk-reference/languages/javascript"]
-    },
-    {
-      "group": "Frameworks",
+      "group": "frameworks",
       "pages": [
-        "sdk-reference/frameworks/react",
+        "frameworks/javascript",
+        "frameworks/react",
         {
           "group": "Next.js",
           "pages": [
-            "sdk-reference/frameworks/nextjs/app-router",
-            "sdk-reference/frameworks/nextjs/pages-router"
+            "frameworks/nextjs/app-router",
+            "frameworks/nextjs/pages-router"
           ]
         }
       ]
+    },
+    {
+      "group": "Guides",
+      "pages": ["guides/createFlow"]
     }
   ],
   "footerSocials": {
