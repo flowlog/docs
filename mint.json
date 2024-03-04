@@ -18,17 +18,21 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:paco@flowlog.io"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.flowlog.io"
   },
   "tabs": [
     {
       "name": "SDK Reference",
       "url": "sdk-reference"
+    },
+    {
+      "name": "Guides",
+      "url": "guides"
     }
   ],
   "anchors": [
