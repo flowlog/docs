@@ -11,43 +11,41 @@ A pageview event refers to tracking when a user views a specific page on a websi
 
 On every pageview event, flowlog automatically capture the following properties:
 
-<ResponseField name="browser" type="auto[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
+<ResponseField name="$browser" type="auto">
+  Browser information, including the browser's name, version, and engine.
 </ResponseField>
-<ResponseField name="timestamp" type="auto[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
+<ResponseField name="$timestamp" type="auto">
+  Timestamp data, indicating specific dates and times of events or actions.
 </ResponseField>
-<ResponseField name="system" type="auto[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
+<ResponseField name="$system" type="auto">
+  System information, detailing the operating system, architecture, and other
+  relevant system details.
 </ResponseField>
-<ResponseField name="device" type="auto[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
+<ResponseField name="$device" type="auto">
+  Device information, including the type of device, model, and manufacturer.
 </ResponseField>
-<ResponseField name="geolocation" type="auto[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
+<ResponseField name="$geolocation" type="auto">
+  Geolocation data, providing coordinates (latitude and longitude), city, and
+  country information.
 </ResponseField>
-<ResponseField name="distinct_id" type="auto[]">
-  An array of the anchors, includes the `icon`, `color`, and `url`.
+<ResponseField name="$distinct_id" type="auto">
+  Unique identifiers, typically used to track individual users or entities
+  across sessions or interactions.
 </ResponseField>
 
 ### Usage
 
-Use [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) by enclosing code in three backticks and follow the leading ticks with the programming language of your snippet to get syntax highlighting. Optionally, you can also write the name of your code after the programming language.
+```jsx app.jsx
+import React from "react";
+import { useFlowlog } from "flowlog/react";
 
-```java HelloWorld.java
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
+export default function App() {
+  const flowlog = useFlowlog();
+
+  React.useEffect(() => {
+    flowlog.track("$pageview");
+  }, []);
+
+  return <div>Hello</div>;
 }
 ```
-
-````md
-```java HelloWorld.java
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
-```
-````

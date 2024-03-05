@@ -27,11 +27,6 @@
   },
   "anchors": [
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://flowlog.io/blog"
@@ -49,8 +44,6 @@
     {
       "group": "frameworks",
       "pages": [
-        "frameworks/javascript",
-        "frameworks/react",
         {
           "group": "Next.js",
           "pages": [
@@ -62,7 +55,12 @@
     },
     {
       "group": "Guides",
-      "pages": ["guides/createFlow"]
+      "pages": [
+        {
+          "group": "Account",
+          "pages": ["guides/account/create-account"]
+        }
+      ]
     }
   ],
   "footerSocials": {

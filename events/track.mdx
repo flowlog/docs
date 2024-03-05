@@ -1,6 +1,67 @@
 ---
 title: "Custom event"
-description: "Monitor and analyze specific actions or events that occur within a digital environment, which may not be automatically tracked by default"
+description: "Track an custom action made by the user that is not automatically captured by flowlog"
 ---
 
-<Note>TODO</Note>
+## Description
+
+A custom event in product analytics refers to a user action or system occurrence that is specifically defined by the organization to track interactions within their digital product that are not captured by default analytics metrics. Unlike standard events, which might include generic actions like page views, sessions, or clicks on predefined elements, custom events are tailored to capture more nuanced or specific activities that are critical to understanding user behavior and product performance from the perspective of the business's unique goals and user experience.
+
+### Properties
+
+On every pageview event, flowlog automatically capture the following properties:
+
+<ResponseField name="$browser" type="auto">
+  Browser information, including the browser's name, version, and engine.
+</ResponseField>
+<ResponseField name="$timestamp" type="auto">
+  Timestamp data, indicating specific dates and times of events or actions.
+</ResponseField>
+<ResponseField name="$system" type="auto">
+  System information, detailing the operating system, architecture, and other
+  relevant system details.
+</ResponseField>
+<ResponseField name="$device" type="auto">
+  Device information, including the type of device, model, and manufacturer.
+</ResponseField>
+<ResponseField name="$geolocation" type="auto">
+  Geolocation data, providing coordinates (latitude and longitude), city, and
+  country information.
+</ResponseField>
+<ResponseField name="$distinct_id" type="auto">
+  Unique identifiers, typically used to track individual users or entities
+  across sessions or interactions.
+</ResponseField>
+
+### Custom properties
+
+You can set properties to your custom event, for example, this will be useful to create insights in your Flowlog dashboard:
+
+```json
+{
+  "product_id": "123",
+  "product_name": "Shoes",
+  "price": 100
+}
+```
+
+### Usage
+
+```jsx component.jsx
+import React from "react";
+import { useFlowlog } from "flowlog/react";
+
+export default function App() {
+  const flowlog = useFlowlog();
+
+  React.useEffect(() => {
+    flowlog.track("Item purchase", {
+      product_id: "123",
+      product_name: "Shoes",
+      price: 100,
+    });
+  }, []);
+
+  return <div>Hello</div>;
+}
+```

@@ -1,6 +1,111 @@
 ---
 title: "Identify"
-description: Event that uniquely identifies a user. This is useful to track a user's activity over time.
+description: "Recognize users and track their actions, this is useful for Attributing actions to users, segmentation and customization, lifetime value tracking"
 ---
 
-<Note>TODO</Note>
+## Description
+
+An "identify" event in product analytics is a critical type of event that is used to track and record the identity of a user interacting with a digital product. This event is pivotal for connecting all of a user's actions and behaviors to a unique identifier, enabling a cohesive analysis of user behavior over time across different sessions, devices, or platforms.
+
+When an identify event is triggered, it usually involves capturing a distinct user ID (which can be an anonymous ID, email address, or any other unique identifier) and potentially a set of user attributes (like demographics, preferences, and behaviors). This information is then used to create or update a user profile in the analytics system. The purpose is to maintain a continuous and integrated view of how individual users interact with the product, which is invaluable for personalization, targeted marketing, customer service, and overall user experience enhancements.
+
+The identify event is crucial for:
+
+#### Attributing actions to users
+
+It ensures that every action taken on the platform can be attributed to the same user across different sessions and devices, even if they log out and return later or switch from mobile to desktop.
+
+#### Segmentation and Personalization
+
+By associating specific attributes and behaviors with identified users, companies can segment their user base for more targeted analysis, communication, and personalization strategies.
+
+### Lifetime Value Tracking
+
+It allows for the analysis of a user's interactions with the product over their entire lifecycle, providing insights into user retention, lifetime value, and churn.
+Implementing the identify event typically involves calling a specific function in the product analytics SDK (Software Development Kit) whenever a user signs up, logs in, or updates their profile information. This function call includes the unique user ID and any relevant user attributes to be associated with that ID.
+
+By effectively using identify events, organizations can greatly enhance their understanding of user behavior, improve user engagement, and drive more informed product development and marketing decisions.
+
+### Recomended custom properties
+
+Flowlog follows Segment reserved traits that have semantic meanings for users, and will handle them in special ways. For example, Segment always expects email to be a string of the user’s email address. Segment sends this on to destinations like Mailchimp that require an email address for their tracking.
+
+<ResponseField name="email" type="String">
+  Email address of the user.
+</ResponseField>
+<ResponseField name="name" type="String">
+  Full name of the user.
+</ResponseField>
+<ResponseField name="first" type="String">
+  First name of the user.
+</ResponseField>
+<ResponseField name="username" type="String">
+  Username selected by the user.
+</ResponseField>
+<ResponseField name="last_name" type="String">
+  Last name of the user.
+</ResponseField>
+<ResponseField name="description" type="String">
+  A brief description or bio of the user.
+</ResponseField>
+<ResponseField name="phone" type="String">
+  Phone number of the user.
+</ResponseField>
+<ResponseField name="address" type="String">
+  Physical address of the user.
+</ResponseField>
+<ResponseField name="age" type="Integer">
+  Age of the user.
+</ResponseField>
+<ResponseField name="avatar" type="String">
+  URL to the avatar image of the user.
+</ResponseField>
+<ResponseField name="birthday" type="Date">
+  Birthdate of the user.
+</ResponseField>
+<ResponseField name="gender" type="String">
+  Gender of the user.
+</ResponseField>
+<ResponseField name="title" type="String">
+  Job title or position of the user.
+</ResponseField>
+<ResponseField name="website" type="String">
+  Personal or company website URL of the user.
+</ResponseField>
+
+### Auto properties
+
+<ResponseField name="$browser" type="auto">
+  Browser information, including the browser's name, version, and engine.
+</ResponseField>
+<ResponseField name="$timestamp" type="auto">
+  Timestamp data, indicating specific dates and times of events or actions.
+</ResponseField>
+<ResponseField name="$system" type="auto">
+  System information, detailing the operating system, architecture, and other
+  relevant system details.
+</ResponseField>
+<ResponseField name="$device" type="auto">
+  Device information, including the type of device, model, and manufacturer.
+</ResponseField>
+<ResponseField name="$geolocation" type="auto">
+  Geolocation data, providing coordinates (latitude and longitude), city, and
+  country information.
+</ResponseField>
+
+### Usage
+
+```javascript component.jsx
+flowlog.identify("internal_user_id_12345", {
+  email: "user@example.com",
+  name: "John Doe",
+  first: "John",
+  last_name: "Doe",
+  phone: "+1234567890",
+  address: "123 Main St, Anytown, AN 12345",
+  age: 30,
+  gender: "Male",
+  title: "Software Engineer",
+  website: "https://www.johndoe.com",
+});
+```
