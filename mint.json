@@ -44,6 +44,8 @@
     {
       "group": "frameworks",
       "pages": [
+        "frameworks/react",
+        "frameworks/vue",
         {
           "group": "Next.js",
           "pages": [

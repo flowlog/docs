@@ -1,0 +1,55 @@
+---
+title: "Vue"
+description: "Learn how to send your first event to using Flowlog SDK"
+---
+
+import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
+
+<Info>
+  **Prerequisite** You should have installed Node.js (version 18.10.0 or
+  higher).
+</Info>
+
+## Setup
+
+<InstallFlowlogSDK />
+
+### Create a 'src/flowlog-client' file to initialize the Flowlog SDK
+
+<CodeGroup>
+
+```jsx flowlog-client.ts
+import flowlogJS from "flowlog-js";
+
+export default flowlogJS({
+  apiKey: "YOUR_API_KEY",
+});
+```
+
+</CodeGroup>
+
+### Track your first event
+
+<CodeGroup>
+
+```ts button-track.js
+<script setup lang="ts">
+import { ref } from "vue";
+import flowlogjs from "./flowlog-client";
+
+const count = ref(0);
+
+function handleClick() {
+  flowlogjs.track("click-button", {
+    count: count.value,
+  });
+  count.value++;
+}
+</script>
+
+<template>
+  <button type="button" @click="handleClick">count is {{ count }}</button>
+</template>
+```
+
+</CodeGroup>
