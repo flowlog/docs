@@ -3,4 +3,43 @@ title: "React"
 description: "Learn how to send your first event to using Flowlog SDK"
 ---
 
-<Note>TODO</Note>
+import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
+
+<Info>
+  **Prerequisite** You should have installed Node.js (version 18.10.0 or
+  higher).
+</Info>
+
+## Setup
+
+<InstallFlowlogSDK />
+
+### Create a 'app/provider' file to initialize the Flowlog SDK
+
+<CodeGroup>
+
+```jsx javascript
+import { FlowlogProvider } from "flowlog-js/react";
+
+export function Providers({ children }) {
+  return (
+    <FlowlogProvider apiKey={process.env.REACT_APP_PUBLIC_FLOWLOG_KEY}>
+      {children}
+    </FlowlogProvider>
+  );
+}
+```
+
+```jsx typescript
+import { FlowlogProvider } from "flowlog-js/react";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <FlowlogProvider apiKey={process.env.REACT_APP_PUBLIC_FLOWLOG_KEY!}>
+      {children}
+    </FlowlogProvider>
+  );
+}
+```
+
+</CodeGroup>
