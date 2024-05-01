@@ -66,3 +66,59 @@ export default function Index() {
 ```
 
 </CodeGroup>
+
+### Optional: Track page views
+
+You can track page views with `react-router-dom` with `useLocation` hook:
+
+<CodeGroup>
+
+```jsx src/App.js
+import { Fragment, useEffect } from "react";
+import { useFlowlog } from "flowlog-js/react";
+import { Route, Routes, Link, useLocation } from "react-router-dom";
+
+function App() {
+  const flowlog = useFlowlog();
+  const location = useLocation();
+
+  useEffect(() => {
+    flowlog?.page();
+  }, [location, flowlog]);
+
+  return (
+    <Fragment>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Fragment>
+  );
+}
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
+};
+
+const About = () => {
+  return <h1>About</h1>;
+};
+
+export default App;
+```
+
+</CodeGroup>
