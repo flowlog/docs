@@ -26,15 +26,15 @@ import App from "./App";
 import flowlog from "flowlog-js";
 import { FlowlogProvider } from "flowlog-js/react";
 
-if (typeof window !== "undefined") {
-  flowlog.init("API_TOKEN");
-}
+const flowlowInstance = flowlog({
+  apiKey: "API_TOKEN",
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <FlowlogProvider client={flowlog}>
+    <FlowlogProvider client={flowlowInstance}>
       <App />
     </FlowlogProvider>
   </React.StrictMode>
