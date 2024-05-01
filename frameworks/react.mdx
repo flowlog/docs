@@ -14,30 +14,53 @@ import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
 
 <InstallFlowlogSDK />
 
-### Create a 'app/provider' file to initialize the Flowlog SDK
+Then initialize the Flowlog SDK in your app:
 
 <CodeGroup>
 
-```jsx javascript
+```js src/index.js
+// src/index.js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import flowlog from "flowlog-js";
 import { FlowlogProvider } from "flowlog-js/react";
 
-export function Providers({ children }) {
-  return (
-    <FlowlogProvider apiKey={process.env.REACT_APP_PUBLIC_FLOWLOG_KEY}>
-      {children}
-    </FlowlogProvider>
-  );
+if (typeof window !== "undefined") {
+  flowlog.init("API_TOKEN");
 }
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <FlowlogProvider client={flowlog}>
+      <App />
+    </FlowlogProvider>
+  </React.StrictMode>
+);
 ```
 
-```jsx typescript
-import { FlowlogProvider } from "flowlog-js/react";
+</CodeGroup>
 
-export function Providers({ children }: { children: React.ReactNode }) {
+### Track your first event
+
+<CodeGroup>
+
+```jsx src/track-button.js
+import { useFlowlog } from "flowlog-js/react";
+
+export default function Index() {
+  const flowlog = useFlowlog();
+
   return (
-    <FlowlogProvider apiKey={process.env.REACT_APP_PUBLIC_FLOWLOG_KEY!}>
-      {children}
-    </FlowlogProvider>
+    <button
+      onClick={() => {
+        flowlog?.track("button_clicked", { button_name: "home_button" });
+      }}
+    >
+      Click here
+    </button>
   );
 }
 ```
