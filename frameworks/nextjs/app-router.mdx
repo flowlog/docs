@@ -20,33 +20,35 @@ import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
 
 ```jsx javascript
 // app/provider.jsx
-
 "use client";
-import flowlog from "flowlog-js";
+import flowlogJS from "flowlog-js";
 import { FlowlogProvider } from "flowlog-js/react";
 
-if (typeof window !== "undefined") {
-  flowlog.init(process.env.NEXT_PUBLIC_FLOWLOG_TOKEN);
-}
+const analyticsInstance = flowlogJS({
+  apiKey: "API_KEY",
+});
 
 export function FLProvider({ children }) {
-  return <FlowlogProvider client={flowlog}>{children}</FlowlogProvider>;
+  return (
+    <FlowlogProvider client={analyticsInstance}>{children}</FlowlogProvider>
+  );
 }
 ```
 
-```jsx typescript
+```tsx typescript
 // app/provider.tsx
-
 "use client";
-import flowlog from "flowlog-js";
+import flowlogJS from "flowlog-js";
 import { FlowlogProvider } from "flowlog-js/react";
 
-if (typeof window !== "undefined") {
-  flowlog.init(process.env.NEXT_PUBLIC_FLOWLOG_TOKEN!);
-}
+const analyticsInstance = flowlogJS({
+  apiKey: "API_KEY",
+});
 
 export function FLProvider({ children }: { children: React.ReactNode }) {
-  return <FlowlogProvider client={flowlog}>{children}</FlowlogProvider>;
+  return (
+    <FlowlogProvider client={analyticsInstance}>{children}</FlowlogProvider>
+  );
 }
 ```
 
