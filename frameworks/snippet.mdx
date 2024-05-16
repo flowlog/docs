@@ -1,0 +1,24 @@
+---
+title: "Snippet"
+description: "Learn how to send your first event to using Flowlog SDK"
+---
+
+## Setup
+
+Add the JavaScript snippet to your HTML
+
+Copy the snippet below and replace **API_KEY** with your Flowlog API key
+
+```html
+<script src="https://unpkg.com/flowlog-js/dist/index.iife.js"></script>
+<script>
+  const flowlog = _flowlog.init({
+    apiKey: "API_KEY",
+  });
+  // Nice! You're all set up. You can now start tracking events.
+
+  flowlog.page();
+  // To track an event
+  // flowlog.track("Your First Event");
+</script>
+```

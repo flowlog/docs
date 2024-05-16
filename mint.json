@@ -44,6 +44,7 @@
     {
       "group": "frameworks",
       "pages": [
+        "frameworks/snippet",
         "frameworks/react",
         "frameworks/vue",
         {
