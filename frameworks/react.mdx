@@ -172,6 +172,26 @@ export default function Index() {
 
 ##### Flowlog had some reserved properties to help you organize your information
 
+| Property          | Description                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| $browser          | The name of the browser being used by the user.                                    |
+| $browser_language | The language setting of the user's browser.                                        |
+| $browser_version  | The version of the browser being used.                                             |
+| $current_url      | The current URL of the webpage the user is on.                                     |
+| $os               | The operating system of the user's device.                                         |
+| $screen_height    | The height of the user's screen in pixels.                                         |
+| $screen_width     | The width of the user's screen in pixels.                                          |
+| $viewport_height  | The height of the user's browser viewport (visible area of the webpage) in pixels. |
+| $viewport_width:  | The width of the user's browser viewport (visible area of the webpage) in pixels.  |
+| $referrer         | The URL of the previous webpage that referred the user to the current page.        |
+
+<Warning>
+  This properties are automatic track everytime you send a event, avoid to send
+  custom properties with the $ prefix, Flowlog will not ingest those properties
+</Warning>
+
+##### Also, Flowlog has a reserved property to track the success or error of the event
+
 - `status`: To avoid send multiple custom events for example `plan-update-error` or `plan-update-success` to reflect an error. Use this reserved property to track the success or error of the event. You can use the HTTP status code to track the success or error of the event.
 
 <CodeGroup>
