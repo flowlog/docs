@@ -1,6 +1,8 @@
 ---
 title: "Vue"
-description: "Learn how to send your first event to using Flowlog SDK"
+description: "Welcome to the Flowlog Vue guide. Learn how to install the Flowlog SDK in your Vue application and start tracking page views and custom events."
+sidebarTitle: "Vue"
+icon: "vuejs"
 ---
 
 import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
@@ -10,14 +12,21 @@ import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
   higher).
 </Info>
 
-## Setup
+## Setup Flowlog
+
+<Steps>
+<Step title="Install the SDK in your codebase">
+
+##### To start using Flowlog, you need to install the Flowlog SDK in your project. You can install the SDK using npm, yarn, or pnpm.
 
 <InstallFlowlogSDK />
 
-### Create a 'src/flowlog-client' file to initialize the Flowlog SDK
+</Step>
 
+<Step title="Initialize the Flowlog SDK">
+##### Create a 'src/flowlog-client' file to initialize the Flowlog SDK
+##### 
 <CodeGroup>
-
 ```jsx flowlog-client.ts
 import flowlogJS from "flowlog-js";
 
@@ -28,37 +37,17 @@ export default flowlogJS({
 
 </CodeGroup>
 
-### Track your first event
+</Step>
+</Steps>
 
-<CodeGroup>
+## Start with tracking events
 
-```js button-track.js
-<script setup lang="ts">
-import { ref } from "vue";
-import flowlogjs from "./flowlog-client";
+<Steps>
+<Step title="Track your page views">
 
-const count = ref(0);
+##### This method should be called whenever a user visits a new page or screen in your application. Tracking page views helps you understand which pages are visited mostfrequently, how users navigate through your application, and where they may drop off. This data is essential for improving user experience and optimizing your application.
 
-function handleClick() {
-  flowlogjs.track("click-button", {
-    count: count.value,
-  });
-  count.value++;
-}
-</script>
-
-<template>
-  <button type="button" @click="handleClick">count is {{ count }}</button>
-</template>
-```
-
-</CodeGroup>
-
-### Track your first pageview
-
-<Info>
-  This example uses Vue Router to track page views.
-</Info>
+<Info>This example is made with VueRouter. More methods coming up</Info>
 
 <CodeGroup>
 ```ts main.ts
@@ -68,29 +57,195 @@ import VueRouter from "vue-router";
 import flowlogjs from "./flowlog-client";
 import routes from "./routes";
 
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  mode: "history",
-  routes,
+mode: "history",
+routes,
 });
 
-
 router.afterEach((to, from) => {
-  console.log(`Route change to ${to.path} from ${from.path}`);
-  flowlogjs.page(); // Track page view
+console.log(`Route change to ${to.path} from ${from.path}`);
+flowlogjs.page(); // Track page view
 });
 
 new Vue({
-  router,
-  render: (h) => h(App),
+router,
+render: (h) => h(App),
 }).$mount("#app");
 
+````
+
+</CodeGroup>
+
+</Step>
+
+<Step title="Tracking custom events">
+
+##### Tracking custom events provides insights into user interactions beyond simple page views. By capturing actions like button clicks, form submissions, or any other user interactions, you can gain a deeper understanding of user behavior and the effectiveness of different elements in your application.
+
+<Note>Custom event without custom properties</Note>
+
+<CodeGroup>
+```ts main.ts
+
+function handleClick() {
+  flowlogjs.track("click-button-count");
+  count.value++;
+}
+
+<template>
+  <button type="button" @click="handleClick">count is {{ count }}</button>
+</template>
+
+````
+
+</CodeGroup>
+
+<Note>Custom event with custom properties</Note>
+
+<CodeGroup>
+
+```ts main.ts
+
+function handlePlanUpgrade() {
+  flowlogjs.track("plan-update", {
+    // Use up to 15 custom properties
+    plan: "premium",
+    price: 99.99,
+    currency: "USD",
+  });
+  count.value++;
+}
+
+<template>
+  <button type="button" @click="handlePlanUpgrade">Upgrade plan</button>
+</template>
 ```
 
 </CodeGroup>
 
+### Reserved properties for custom events
 
+##### Flowlog had some reserved properties to help you organize your information
 
+- `code`: To avoid send multiple custom events for example `plan-update-error` or `plan-update-success` to reflect an error. Use this reserved property to track the success or error of the event. You can use the HTTP status code to track the success or error of the event.
 
+<CodeGroup>
+
+```js 200
+function handlePlanUpgrade() {
+  flowlogjs.track("plan-update", {
+    // Use code to track the success of the event
+    code: 200,
+    plan: "premium",
+    price: 99.99,
+    currency: "USD",
+  });
+}
+```
+
+```js 400
+function handlePlanUpgrade() {
+  flowlogjs.track("plan-update", {
+    // Use 400 to track an error of the event
+    code: 400,
+    plan: "premium",
+    price: 99.99,
+    currency: "USD",
+  });
+}
+```
+
+</CodeGroup>
+
+<Tip>
+  Flowlog is prepared to show you the result of the event in the dashboard
+</Tip>
+
+</Step>
+
+<Step title="Identify your users">
+
+##### This method should be called whenever a user logs in or registers in your application. Identifying users allows you to track individual user behavior over time. By associating events with specific users, you can personalize experiences, perform user-specific analysis, and improve retention by understanding user journeys and preferences.
+
+<Info>
+  When Flowlog detects a new user, it assigns an anonymous ID to the user while
+  they are not identified. Once you identify your users, Flowlog merges the
+  anonymous ID with the ID you provide in the identify method.
+</Info>
+
+<Tip>
+  {" "}
+  Flowlog recommends using database IDs, in uuidv4 format, instead of email addresses
+  or usernames because database IDs never change. That guarantees that even if the
+  user changes their email address, you can still recognize them as the same person
+  in all of your analytics tools, and you’ll be able to correlate analytics data
+  with your own internal database.{" "}
+</Tip>
+
+<CodeGroup>
+
+```ts main.ts
+flowlog.identify("your-user-database-ID", {
+  // Set up to 15 custom properties to your user
+  email: "user@example.com",
+  name: "John Doe",
+  phone: "+1234567890",
+  plan: "Premium",
+});
+```
+
+</CodeGroup>
+
+<Tip>
+  Use this method once you have the information of the user available, this
+  helps to track the user's behavior and actions.
+</Tip>
+
+### Reserved properties for identified users
+
+##### Flowlog had some reserved properties to help you organize your users information and track their behavior
+
+| Property    | Description                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------- |
+| name        | Full name of user                                                                            |
+| firstName   | First name of a user                                                                         |
+| lastName    | Last name of a user                                                                          |
+| username    | usually a handle                                                                             |
+| email       | User email                                                                                   |
+| phone       | Users phone number                                                                           |
+| description | Description of the user                                                                      |
+| age         | Age of a user                                                                                |
+| address     | Street address of a user optionally containing: city, country, postalCode, state, or street  |
+| avatar      | URL to an avatar image for the user                                                          |
+| birthday    | User’s birthday                                                                              |
+| company     | Company the user represents                                                                  |
+| title       | Title of a user, usually related to their position at a company Example: “VP of Engineering” |
+| website     | Reported age                                                                                 |
+| id          | The ID of the user on your database                                                          |
+| createdAt   | Date the user’s account was first created. Segment recommends using ISO-8601 date strings.   |
+
+<Tip>
+  You can set this reserved properties to track the user's behavior and actions
+  along up to 15 more custom properties
+</Tip>
+
+</Step>
+</Steps>
+
+## Tips for tracking events
+
+##### Some recomendations to track events
+
+### Take your time to plan what to track
+
+##### Take your time to plan what to track. Think about the key actions users can take in your application and what data you need to capture to understand user behavior and improve your application.
+
+### Track entire user journeys
+
+##### To understand how users interact with your application, track entire user journeys from the moment they land on your site to the moment they leave. This will help you identify common paths users take, where they drop off, and how you can optimize their experience. For example an `Onboarding process`, a `Checkout process`, or a `Subscription process`
+
+### Use a consistent event naming convention
+
+##### Use a consistent naming convention for your events to make it easier to analyze and compare data across different events. For example, if you have a button click event, you could name it `click-button`, `purchase-product`, `update-plan`.
