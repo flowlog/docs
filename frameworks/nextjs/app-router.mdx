@@ -135,7 +135,7 @@ export default function FlowlogPageView() {
 
 </CodeGroup>
 
-Then, import the `FLProvider` component into your app/layout file and wrap your app with it. We also dynamically import the `FlowlogPageView` component and include it as a child of `FLProvider`.
+##### Then, import the `FLProvider` component into your app/layout file and wrap your app with it. We also dynamically import the `FlowlogPageView` component and include it as a child of `FLProvider`.
 
 <CodeGroup>
 
@@ -257,15 +257,15 @@ export default function Index() {
 
 ##### Flowlog had some reserved properties to help you organize your information
 
-- `code`: To avoid send multiple custom events for example `plan-update-error` or `plan-update-success` to reflect an error. Use this reserved property to track the success or error of the event. You can use the HTTP status code to track the success or error of the event.
+- `status`: To avoid send multiple custom events for example `plan-update-error` or `plan-update-success` to reflect an error. Use this reserved property to track the success or error of the event. You can use the HTTP status code to track the success or error of the event.
 
 <CodeGroup>
 
-```js 200
+```js success
 function handlePlanUpgrade() {
   flowlog?.track("plan-update", {
     // Use code to track the success of the event
-    code: 200,
+    status: "success",
     plan: "premium",
     price: 99.99,
     currency: "USD",
@@ -273,11 +273,12 @@ function handlePlanUpgrade() {
 }
 ```
 
-```js 400
+```js error
 function handlePlanUpgrade() {
   flowlog?.track("plan-update", {
     // Use 400 to track an error of the event
-    code: 400,
+    status: "error",
+    error: "Plan update failed",
     plan: "premium",
     price: 99.99,
     currency: "USD",
