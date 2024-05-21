@@ -14,7 +14,7 @@ import InstallFlowlogSDK from "/snippets/install-flowlog-sdk.mdx";
 
 ## Setup Flowlog
 
-<Steps>
+<Steps titleSize="h3">
 <Step title="Install the SDK in your codebase">
 
 ##### To start using Flowlog, you need to install the Flowlog SDK in your project. You can install the SDK using npm, yarn, or pnpm.
@@ -42,7 +42,7 @@ export default flowlogJS({
 
 ## Start with tracking events
 
-<Steps>
+<Steps titleSize="h3">
 <Step title="Track your page views">
 
 ##### This method should be called whenever a user visits a new page or screen in your application. Tracking page views helps you understand which pages are visited mostfrequently, how users navigate through your application, and where they may drop off. This data is essential for improving user experience and optimizing your application.
@@ -242,9 +242,18 @@ flowlog.identify("your-user-database-ID", {
 
 ##### Take your time to plan what to track. Think about the key actions users can take in your application and what data you need to capture to understand user behavior and improve your application.
 
+<Tip>
+  Bests world class teams, plan ahead what to track in order to have better
+  quality data
+</Tip>
+
 ### Track entire user journeys
 
 ##### To understand how users interact with your application, track entire user journeys from the moment they land on your site to the moment they leave. This will help you identify common paths users take, where they drop off, and how you can optimize their experience. For example an `Onboarding process`, a `Checkout process`, or a `Subscription process`
+
+<Tip>
+  Flowlog was built to support Flows as a way to track the entire user journey
+</Tip>
 
 ### Use a consistent event naming convention
 
