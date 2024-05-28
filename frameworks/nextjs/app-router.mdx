@@ -211,7 +211,7 @@ export default function Index() {
       <h1>Home</h1>
       <button
         onClick={() => {
-          flowlog?.track("click-button-count");
+          flowlog?.track("click_button_count");
         }}
       >
         Click here
@@ -236,7 +236,7 @@ export default function Index() {
       <h1>Home</h1>
       <button
         onClick={() => {
-          flowlog?.track("plan-update", {
+          flowlog?.track("plan_update", {
             // Use up to 15 custom properties
             plan: "premium",
             price: 99.99,
@@ -277,13 +277,13 @@ export default function Index() {
 
 ##### Also, Flowlog has a reserved property to track the success or error of the event
 
-- `status`: To avoid send multiple custom events for example `plan-update-error` or `plan-update-success` to reflect an error. Use this reserved property to track the success or error of the event. You can use the HTTP status code to track the success or error of the event.
+- `status`: To avoid send multiple custom events for example `plan_update_error` or `plan_update_success` to reflect an error. Use this reserved property to track the success or error of the event. You can use the HTTP status code to track the success or error of the event.
 
 <CodeGroup>
 
 ```js success
 function handlePlanUpgrade() {
-  flowlog?.track("plan-update", {
+  flowlog?.track("plan_update", {
     // Use code to track the success of the event
     status: "success",
     plan: "premium",
@@ -295,7 +295,7 @@ function handlePlanUpgrade() {
 
 ```js error
 function handlePlanUpgrade() {
-  flowlog?.track("plan-update", {
+  flowlog?.track("plan_update", {
     // Use 400 to track an error of the event
     status: "error",
     error: "Plan update failed",
@@ -408,4 +408,4 @@ flowlog.identify("your-user-database-ID", {
 
 ### Use a consistent event naming convention
 
-##### Use a consistent naming convention for your events to make it easier to analyze and compare data across different events. For example, if you have a button click event, you could name it `click-button`, `purchase-product`, `update-plan`.
+##### Use a consistent naming convention for your events, the robust way to do it is with snake-case to make it easier to analyze and compare data across different events. For example, if you have a button click event, you could name it `click_button`, `purchase_product`, `update_plan`.
